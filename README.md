@@ -1,5 +1,2 @@
-# Boink
-This repo is called boink
-This repo is an experiment
-This repo was made by a middle schooler
-This repo sucks
+# Apple Farm
+First time trying to make a game. (JS is not my main language send help)
