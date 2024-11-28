@@ -1,2 +1,2 @@
 # Apple Farm
-First time trying to make a game. (JS is not my main language send help)
+I HAVE NEVER USED HTML. (or javascript) please send help.
