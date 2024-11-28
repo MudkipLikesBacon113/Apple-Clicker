@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orchard Clicker</title>
+    <style>
+        body {
+            background-image: url("biblically accurate tree bg.png");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .fundiv {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        .Adiv {
+            margin-top: 250px;
+            margin-left: 200px;
+        }
+    .Bapple {
+    padding: 128px 128px;
+    border: none;
+    background-position: center;
+    margin-top: 100px;
+    background-image: url("Sbipple.png");
+    background-size: cover;
+    transition-duration: 0.3s;
+}
+
+.Bapple:hover {
+    padding: 150px 150px;
+    transition-duration: 0.1s;
+}
+
+.Bapple:active {
+    background-image: url("swipple.png");
+    transition-duration: 0.1s;
+}
+
+        #appleCount {
+            font-size: 24px;
+            color: green;
+            font-weight: bold;
+            text-align: center;
+        }
+        .Udiv {
+            font-family: 'Brush Script MT', cursive;
+            font-size: 48px;
+            text-align: center;
+            max-width: fit-content;
+            max-height: fit-content;
+            position: fixed;top: 0;right: 0;
+            margin-top: 32px;    
+            color: white;
+            font-weight: bold;
+            
+        }
+    .Upgrade {
+        font-family: 'Brush Script MT', cursive;
+        display:block;
+        font-weight:bold;
+        padding: 35px 25px;
+        font-size: 20px;
+        cursor: pointer;
+        text-align: center;
+        outline: none;
+        border: none;
+        background-image: url("2x4.png");
+        color: white;
+        width: 331px
+    }
+    </style>
+</head>
+<body>
+    <div class="fundiv">
+        <img src = "Apple Clicker!.png">
+        <div id="appleCount">Apples Collected: 0</div>
+
+        <button class="Bapple" id="appleButton">
+        </button>
+
+
+
+    </div>
+
+
+
+    
+    <script>
+        // JavaScript for tracking apple clicks
+        let appleCount = 0;
+
+        // Get the apple count display element
+        const appleCountDisplay = document.getElementById('appleCount');
+
+        // Get the apple button
+        const appleButton = document.getElementById('appleButton');
+
+        // Add click event listener to the button
+        appleButton.addEventListener('click', function() {
+            // Increment apple count
+            appleCount++;
+
+            // Update the display
+            appleCountDisplay.textContent = `Apples Collected: ${appleCount}`;
+        
+        });
+    </script>
+
+
+</body>
+</html>
+<div class ="Udiv">Upgrades
+    <button class ="Upgrade">Apple Tree (0): 100 Apples   </button>
+    <button class ="Upgrade">Farmer Joe (0): 100 Apples</button>
+
+</div>
+
+<script>
+    let TreePrice = 100;
+    let TreeUpgradeCount = 0
+    let TreeperSec = 0
+
+    const TreeUpgrade = document.querySelectorAll('.Upgrade')[0];
+
+    TreeUpgrade.addEventListener("click", function() {
+        if (appleCount >= treePrice) {
+            appleCount -= treePrice
+            TreeUpgradeCount += 1
+            TreeperSec += 1
+            
+
+        }
+
+    })
+    
+</script>
