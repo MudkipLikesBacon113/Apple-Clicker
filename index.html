@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Orchard Clicker</title>
@@ -12,35 +13,29 @@
             text-align: center;
             font-family: Arial, sans-serif;
         }
-        .Adiv {
-            margin-top: 250px;
-            margin-left: 200px;
-        }
-    .Bapple {
-    padding: 128px 128px;
-    border: none;
-    background-position: center;
-    margin-top: 100px;
-    background-image: url("Sbipple.png");
-    background-size: cover;
-    transition-duration: 0.3s;
-}
-
-.Bapple:hover {
-    padding: 150px 150px;
-    transition-duration: 0.1s;
-}
-
-.Bapple:active {
-    background-image: url("swipple.png");
-    transition-duration: 0.1s;
-}
-
         #appleCount {
             font-size: 24px;
             color: green;
             font-weight: bold;
             text-align: center;
+        }
+        .Bapple {
+            padding: 128px 128px;
+            border: none;
+            margin-top: 100px;
+            background-image: url("Sbipple.png");
+            background-size: cover;
+            background-position: center;
+            cursor: pointer;
+            transition-duration: 0.3s;
+        }
+        .Bapple:hover {
+            padding: 150px 150px;
+            transition-duration: 0.1s;
+        }
+        .Bapple:active {
+            background-image: url("swipple.png");
+            transition-duration: 0.1s;
         }
         .Udiv {
             font-family: 'Brush Script MT', cursive;
@@ -48,89 +43,82 @@
             text-align: center;
             max-width: fit-content;
             max-height: fit-content;
-            position: fixed;top: 0;right: 0;
+            position: fixed;
+            top: 0;
+            right: 0;
             margin-top: 32px;    
             color: white;
             font-weight: bold;
-            
         }
-    .Upgrade {
-        font-family: 'Brush Script MT', cursive;
-        display:block;
-        font-weight:bold;
-        padding: 35px 25px;
-        font-size: 20px;
-        cursor: pointer;
-        text-align: center;
-        outline: none;
-        border: none;
-        background-image: url("2x4.png");
-        color: white;
-        width: 331px
-    }
+        .Upgrade {
+            font-family: 'Brush Script MT', cursive;
+            display: block;
+            font-weight: bold;
+            padding: 35px 25px;
+            font-size: 20px;
+            cursor: pointer;
+            text-align: center;
+            outline: none;
+            border: none;
+            background-image: url("2x4.png");
+            color: white;
+            width: 331px;
+            margin-top: 10px;
+        }
+        .Upgrade:hover {
+            background-image: url("bigar24.png");
+            padding:39px 39px;
+            height:116px;
+            width: 354px;
+            font-size: 30;
+            transition-duration: 0.2s;
+
+
+        }
     </style>
 </head>
 <body>
     <div class="fundiv">
-        <img src = "Apple Clicker!.png">
+        <img src="Apple Clicker!.png" alt="Apple Clicker Logo">
         <div id="appleCount">Apples Collected: 0</div>
-
-        <button class="Bapple" id="appleButton">
-        </button>
-
-
-
+        <button class="Bapple" id="appleButton"></button>
+    </div>
+    <div class="Udiv">
+        Upgrades
+        <button class="Upgrade" id="treeUpgradeButton">Apple Tree (0): 100 Apples</button>
+        <button class="Upgrade">Farmer Joe (0): 100 Apples</button>
     </div>
 
-
-
-    
     <script>
-        // JavaScript for tracking apple clicks
-        let appleCount = 0;
+        document.addEventListener('DOMContentLoaded', function () {
+            let appleCount = 0; // Tracks apples collected
+            let treeCount = 0;  // Tracks purchased Apple Trees
+            const treePrice = 100; // Cost of one Apple Tree
 
-        // Get the apple count display element
-        const appleCountDisplay = document.getElementById('appleCount');
+            // Get DOM elements
+            const appleCountDisplay = document.getElementById('appleCount');
+            const appleButton = document.getElementById('appleButton');
+            const treeUpgradeButton = document.getElementById('treeUpgradeButton');
 
-        // Get the apple button
-        const appleButton = document.getElementById('appleButton');
+            // Add functionality for clicking the apple button
+            appleButton.addEventListener('click', function () {
+                appleCount++;
+                appleCountDisplay.textContent = `Apples Collected: ${appleCount}`;
+            });
 
-        // Add click event listener to the button
-        appleButton.addEventListener('click', function() {
-            // Increment apple count
-            appleCount++;
-
-            // Update the display
-            appleCountDisplay.textContent = `Apples Collected: ${appleCount}`;
-        
+            // Add functionality for the Tree Upgrade button
+            treeUpgradeButton.addEventListener('click', function () {
+                if (appleCount >= treePrice) {
+                    // Deduct apples and increase tree count
+                    appleCount -= treePrice;
+                    treeCount++;
+                    appleCountDisplay.textContent = `Apples Collected: ${appleCount}`;
+                    treeUpgradeButton.textContent = `Apple Tree (${treeCount}): ${treePrice} Apples`;
+                } else {
+                    // Notify if insufficient apples
+                }
+            });
         });
     </script>
-
-
 </body>
 </html>
-<div class ="Udiv">Upgrades
-    <button class ="Upgrade">Apple Tree (0): 100 Apples   </button>
-    <button class ="Upgrade">Farmer Joe (0): 100 Apples</button>
-
-</div>
-
-<script>
-    let TreePrice = 100;
-    let TreeUpgradeCount = 0
-    let TreeperSec = 0
-
-    const TreeUpgrade = document.querySelectorAll('.Upgrade')[0];
-
-    TreeUpgrade.addEventListener("click", function() {
-        if (appleCount >= treePrice) {
-            appleCount -= treePrice
-            TreeUpgradeCount += 1
-            TreeperSec += 1
-            
-
-        }
-
-    })
-    
-</script>
