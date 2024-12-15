@@ -51,30 +51,26 @@
             font-weight: bold;
         }
         .Upgrade {
-            font-family: 'Brush Script MT', cursive;
-            display: block;
-            font-weight: bold;
-            padding: 35px 25px;
-            font-size: 20px;
-            cursor: pointer;
-            text-align: center;
-            outline: none;
-            border: none;
-            background-image: url("2x4.png");
-            color: white;
-            width: 331px;
-            margin-top: 10px;
-        }
-        .Upgrade:hover {
-            background-image: url("bigar24.png");
-            padding:39px 39px;
-            height:116px;
-            width: 354px;
-            font-size: 30;
-            transition-duration: 0.2s;
+    font-family: 'Brush Script MT', cursive;
+    display: block;
+    font-weight: bold;
+    padding: 35px 25px;
+    font-size: 20px;
+    cursor: pointer;
+    text-align: center;
+    outline: none;
+    border: none;
+    background-image: url("2x4.png");
+    color: white;
+    width: 331px; /* Fixed width */
+    height: 97px; /* Fixed height */
+    margin-top: 10px;
+    overflow: hidden; /* Prevent content overflow */
+    text-overflow: ellipsis; /* Add "..." if text overflows */
+    white-space: nowrap; /* Prevent text wrapping */
+}
 
 
-        }
     </style>
 </head>
 <body>
@@ -86,24 +82,32 @@
     <div class="Udiv">
         Upgrades
         <button class="Upgrade" id="treeUpgradeButton">Apple Tree (0): 100 Apples</button>
-        <button class="Upgrade">Farmer Joe (0): 100 Apples</button>
+        <button class="Upgrade" id="joeUpgradeButton">Farmer Joe (0): 500 Apples</button>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            let appleCount = 0; // Tracks apples collected
+            let appleCount = 110000000000; // Tracks apples collected
+            let totalgen = 0;  // Total apples generated per second
+
             let treeCount = 0;  // Tracks purchased Apple Trees
-            const treePrice = 100; // Cost of one Apple Tree
+            let treePrice = 100; // Cost of one Apple Tree
+            let treegen = 0;    // Apples generated per tree per second
+
+            let joeCount = 0;   // Tracks Farmer Joe count
+            let joePrice = 500; // Cost of one Farmer Joe
+            let joegen = 0;     // Apples generated per Farmer Joe per second
 
             // Get DOM elements
             const appleCountDisplay = document.getElementById('appleCount');
             const appleButton = document.getElementById('appleButton');
             const treeUpgradeButton = document.getElementById('treeUpgradeButton');
+            const joeUpgradeButton = document.getElementById("joeUpgradeButton");
 
             // Add functionality for clicking the apple button
             appleButton.addEventListener('click', function () {
                 appleCount++;
-                appleCountDisplay.textContent = `Apples Collected: ${appleCount}`;
+                appleCountDisplay.textContent = `Apples Collected: ${Math.floor(appleCount)}`;
             });
 
             // Add functionality for the Tree Upgrade button
@@ -112,14 +116,37 @@
                     // Deduct apples and increase tree count
                     appleCount -= treePrice;
                     treeCount++;
-                    appleCountDisplay.textContent = `Apples Collected: ${appleCount}`;
+                    treegen = treeCount * 0.1; // Each tree generates 0.1 apples/second
+                    treePrice = Math.floor(treePrice * 1.1);
+
+                    appleCountDisplay.textContent = `Apples Collected: ${Math.floor(appleCount)}`;
                     treeUpgradeButton.textContent = `Apple Tree (${treeCount}): ${treePrice} Apples`;
-                } else {
-                    // Notify if insufficient apples
                 }
             });
+
+            // Add functionality for the Farmer Joe Upgrade button
+            joeUpgradeButton.addEventListener('click', function () {
+                if (appleCount >= joePrice) {
+                    // Deduct apples and increase Farmer Joe count
+                    appleCount -= joePrice;
+                    joeCount++;
+                    joegen = joeCount * 1; // Each Farmer Joe generates 1 apple/second
+                    joePrice = Math.floor(joePrice * 1.1)
+
+                    appleCountDisplay.textContent = `Apples Collected: ${Math.floor(appleCount)}`;
+                    joeUpgradeButton.textContent = `Farmer Joe (${joeCount}): ${joePrice} Apples`;
+                }
+            });
+
+            // Update apples collected based on total generation
+            setInterval(function () {
+                totalgen = treegen + joegen; // Calculate total apples generated per second
+                appleCount += totalgen; // Add generated apples to total
+
+                // Display the updated apple count
+                appleCountDisplay.textContent = `Apples Collected: ${Math.floor(appleCount)}`;
+            }, 1000); // 1-second interval
         });
     </script>
 </body>
 </html>
-
