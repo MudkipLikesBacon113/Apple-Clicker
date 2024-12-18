@@ -91,11 +91,11 @@
             let totalgen = 0;  // Total apples generated per second
 
             let treeCount = 0;  // Tracks purchased Apple Trees
-            let treePrice = 100; // Cost of one Apple Tree
+            let treePrice = 50; // Cost of one Apple Tree
             let treegen = 0;    // Apples generated per tree per second
 
             let joeCount = 0;   // Tracks Farmer Joe count
-            let joePrice = 500; // Cost of one Farmer Joe
+            let joePrice = 150; // Cost of one Farmer Joe
             let joegen = 0;     // Apples generated per Farmer Joe per second
 
             // Get DOM elements
@@ -139,13 +139,20 @@
             });
 
             // Update apples collected based on total generation
-            setInterval(function () {
-                totalgen = treegen + joegen; // Calculate total apples generated per second
-                appleCount += totalgen; // Add generated apples to total
 
-                // Display the updated apple count
+            // Smooth incremental apple addition based on generation rate
+            let lastUpdateTime = Date.now();
+
+            setInterval(function () {
+                const now = Date.now();
+                const deltaTime = (now - lastUpdateTime) / 1000; // Convert to seconds
+                lastUpdateTime = now;
+
+                totalgen = treegen + joegen; // Update total generation rate
+                appleCount += totalgen * deltaTime; // Add apples smoothly based on elapsed time
+
                 appleCountDisplay.textContent = `Apples Collected: ${Math.floor(appleCount)}`;
-            }, 1000); // 1-second interval
+            }, 50); // Update every 50ms for smoother increments
         });
     </script>
 </body>
